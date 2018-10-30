@@ -30,5 +30,4 @@ HEADERS += \
     parsefile.h \
     writetofile.h \
     findprimenubrs.h \
-    logcheck.h \
-    myvector.h
+    logcheck.h

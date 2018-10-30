@@ -4,13 +4,15 @@
 #include "findprimenubrs.h"
 #include "writetofile.h"
 
-void print(vector<int> &myVector);
-
 int main()
 {
     vector<int> myVector;
-    std::string fromFileName = "e:/study/FindingPrimeNumbers/origin_file.xml";
-    std::string toFileName = "e:/study/FindingPrimeNumbers/end_file.xml";
+
+    cout << "Enter file path to read:" << std::endl;
+    std::string fromFileName;
+    std::cin >> fromFileName;
+
+    std::string toFileName = "e://end_file.xml";
 
     ParseFile parsefile(fromFileName);
     parsefile.findingIntervals(myVector);
@@ -20,12 +22,7 @@ int main()
 
     WriteToFile wtfile(toFileName);
     wtfile.writeToXmlFile(myVector);
-}
 
-void print(vector<int> &myVector)
-{
-    for(int i = 0; i < myVector.size(); i++)
-    {
-        std::cout << myVector[i] << endl;
-    }
+    std::cout << "File was saved on disk E:/, with the name: end_file.xml" << std::endl;
+
 }

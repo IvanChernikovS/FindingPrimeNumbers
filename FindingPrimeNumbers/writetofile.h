@@ -9,7 +9,6 @@ using namespace std;
 
 class WriteToFile
 {
-    //friend ofstream& operator <<(ofstream &xmlFileName, WriteToFile fileName ,const vector<int> myVector);
 public:
     WriteToFile(string fileName);
     void writeToXmlFile(vector<int> &myVector);

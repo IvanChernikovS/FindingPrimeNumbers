@@ -47,7 +47,6 @@ vector<int> ParseFile::findingIntervals(vector<int> &myVector)
             if (begin_tag)
             {
                 myVector.push_back(atoi(tmp.c_str()));
-                //cout << myVector[0] << " " << myVector[1];
             }
         }
     }

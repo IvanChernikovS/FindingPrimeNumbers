@@ -4,12 +4,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
-//#include "myvector.h"
 
 using namespace std;
 
-
-class ParseFile /*: public MyVector*/
+class ParseFile
 {
 public:
     ParseFile(string fileName);

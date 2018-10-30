@@ -20,6 +20,8 @@ vector<int> FindPrimeNubrs::sieveEratosthenes(int *lowNumber, int *highNumber, v
         }
     }
 
+    mtx.lock();
+
     for (int i = *lowNumber; i <= *highNumber; ++i)
     {
         if (prime[i])
@@ -27,6 +29,8 @@ vector<int> FindPrimeNubrs::sieveEratosthenes(int *lowNumber, int *highNumber, v
             tmpVector.push_back(i);
         }
     }
+
+    mtx.unlock();
 
     return tmpVector;
 }
@@ -36,11 +40,17 @@ vector<int> FindPrimeNubrs::getAllPrimeNubrs(vector<int> &myVector)
     vector<int> tempVector;
     tempVector.reserve(ESTIMATED_MAX_NUM_OF_ITEMS);
 
-    //int count = myVector.size()/2;
+    int count = myVector.size()/2;
+
+    thread th[count];
 
     for (int i = 0; i < myVector.size(); i+=2)
     {
-        sieveEratosthenes(&myVector[i], &myVector[i+1], tempVector);
+        th[i] = thread([&](){
+            sieveEratosthenes(&myVector[i], &myVector[i+1], tempVector);
+        });
+
+        th[i].join();
     }
 
     myVector.clear();

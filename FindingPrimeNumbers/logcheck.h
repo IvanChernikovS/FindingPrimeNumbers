@@ -1,7 +1,6 @@
 #ifndef LOGCHECK_H
 #define LOGCHECK_H
 
-
 #include <iostream>
 
 class LogCheck;
