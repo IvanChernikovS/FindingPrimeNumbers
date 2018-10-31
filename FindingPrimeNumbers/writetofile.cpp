@@ -1,4 +1,8 @@
 #include "writetofile.h"
+#include <fstream>
+#include <iostream>
+
+using namespace std;
 
 WriteToFile::WriteToFile(string toFileName)
 {
@@ -24,7 +28,7 @@ void WriteToFile::writeToXmlFile (vector<int> &myVector)
     }
     else
     {
-        LOG("end_file wasn`t open");
+        cout << "end_file wasn`t open";
     }
     xmlFileName.close();
 }

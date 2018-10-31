@@ -1,9 +1,11 @@
 #include "findprimenubrs.h"
 #include <iostream>
+#include <thread>
+#include <algorithm>
 
 using namespace std;
 
-vector<int> FindPrimeNubrs::sieveEratosthenes(int *lowNumber, int *highNumber, vector<int> &tmpVector)
+void FindPrimeNubrs::sieveEratosthenes(int *lowNumber, int *highNumber, vector<int> &tmpVector)
 {
     vector<bool> prime(*highNumber + 1, true);
 
@@ -20,7 +22,7 @@ vector<int> FindPrimeNubrs::sieveEratosthenes(int *lowNumber, int *highNumber, v
         }
     }
 
-    mtx.lock();
+    //mtx.lock();
 
     for (int i = *lowNumber; i <= *highNumber; ++i)
     {
@@ -30,38 +32,61 @@ vector<int> FindPrimeNubrs::sieveEratosthenes(int *lowNumber, int *highNumber, v
         }
     }
 
-    mtx.unlock();
+    sort(tmpVector.begin(), tmpVector.end());
+    tmpVector.erase(unique(tmpVector.begin(), tmpVector.end()), tmpVector.end());
 
-    return tmpVector;
+    //mtx.unlock();
 }
 
 vector<int> FindPrimeNubrs::getAllPrimeNubrs(vector<int> &myVector)
 {
-    vector<int> tempVector;
-    tempVector.reserve(ESTIMATED_MAX_NUM_OF_ITEMS);
-
-    int count = myVector.size()/2;
-
-    thread th[count];
-
-    for (int i = 0; i < myVector.size(); i+=2)
+    //FindPrimeNubrs obj;
+    if (!myVector.empty())
     {
-        th[i] = thread([&](){
-            sieveEratosthenes(&myVector[i], &myVector[i+1], tempVector);
-        });
+        vector<int> tempVector;
+        //tempVector.reserve(ESTIMATED_MAX_NUM_OF_ITEMS);
 
-        th[i].join();
+//        void (*foo)(int *lowNumber, int *highNumber, vector<int> &tmpVector);
+//        foo = sieveEratosthenes;
+
+        int count = myVector.size()/2;
+
+        thread th[count];
+
+        for (int i = 0; i < myVector.size(); i+=2)
+        {
+            th[i] = thread([&](){sieveEratosthenes(&myVector[i], &myVector[i+1], tempVector);});
+
+            //th[i] = thread (&FindPrimeNubrs::sieveEratosthenes, obj, &myVector[i], &myVector[i+1], tempVector);
+
+            th[i].join();
+            //sieveEratosthenes(&myVector[i], &myVector[i+1], tempVector);
+        }
+
+//        for (int i = 0; i < count; i++)
+//        {
+//            //th[i] = thread([&](){sieveEratosthenes(&myVector[i], &myVector[i+1], tempVector);});
+
+//            //th[i] = thread (&FindPrimeNubrs::sieveEratosthenes, obj, &myVector[i], &myVector[i+1], tempVector);
+
+//            th[i].join();
+//            //sieveEratosthenes(&myVector[i], &myVector[i+1], tempVector);
+//        }
+
+        myVector.clear();
+        myVector.reserve(tempVector.size());
+
+        for (int j = 0; j < tempVector.size(); j++)
+        {
+            myVector.push_back(tempVector[j]);
+        }
+
+        tempVector.clear();
     }
-
-    myVector.clear();
-    myVector.reserve(tempVector.size());
-
-    for (int j = 0; j < tempVector.size(); j++)
+    else
     {
-        myVector.push_back(tempVector[j]);
+        cout << "Vector is empty!";
     }
-
-    tempVector.clear();
 
     return myVector;
 }

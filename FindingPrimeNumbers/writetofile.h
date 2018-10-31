@@ -2,20 +2,18 @@
 #define WRITETOFILE_H
 
 #include <vector>
-#include <fstream>
-#include "logcheck.h"
-
-using namespace std;
+#include <string>
+#include <iostream>
 
 class WriteToFile
 {
 public:
-    WriteToFile(string fileName);
-    void writeToXmlFile(vector<int> &myVector);
-    string getWriteFileName(){return this -> toFileName;}
-    void setWriteFileName(string toFileName){this -> toFileName = toFileName;}
+    WriteToFile(std::string fileName);
+    void writeToXmlFile(std::vector<int> &myVector);
+    std::string getWriteFileName(){return this -> toFileName;}
+    void setWriteFileName(std::string toFileName){this -> toFileName = toFileName;}
 private:
-    string toFileName;
+    std::string toFileName;
 };
 
 #endif // WRITETOFILE_H
