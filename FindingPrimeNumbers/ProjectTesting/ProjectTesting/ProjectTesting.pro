@@ -14,11 +14,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+INCLUDEPATH += "gtest/include"
+INCLUDEPATH += "gtest/"
+INCLUDEPATH += "../../"
+
 SOURCES += \
-    writetofile.cpp \
-    findprimenubrs.cpp \
-    fileParser.cpp \
-    main.cpp
+        main.cpp \
+    ../../writetofile.cpp \
+    ../../findprimenubrs.cpp \
+    ../../fileParser.cpp \
+    gtest/src/gtest.cc \
+    gtest/src/gtest-all.cc \
+    gtest/src/gtest-death-test.cc \
+    gtest/src/gtest-filepath.cc \
+    gtest/src/gtest-port.cc \
+    gtest/src/gtest-printers.cc \
+    gtest/src/gtest-test-part.cc \
+    gtest/src/gtest-typed-test.cc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -26,6 +38,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    writetofile.h \
-    findprimenubrs.h \
-    fileParser.h
+    ../../writetofile.h \
+    ../../findprimenubrs.h \
+    ../../fileParser.h

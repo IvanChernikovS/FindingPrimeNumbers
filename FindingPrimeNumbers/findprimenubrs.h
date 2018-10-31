@@ -13,7 +13,7 @@ public:
     FindPrimeNubrs(){}
     std::vector<int> getAllPrimeNubrs(std::vector<int> &myVector);
     void sieveEratosthenes(int *lowNumber, int *highNumber, std::vector<int> &tmpVector);
-    //std::mutex mtx;
+    std::mutex mtx;
 };
 
 #endif // FINDPRIMENUBRS_H

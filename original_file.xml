@@ -12,21 +12,12 @@
    </interval>
 
    <interval>
-      <low>
-      50 
-      </low>
-      <high>
-      88 
-      </high>
-   </interval>
-
-   <interval>
-      <low>
-      90 
-      </low>
-      <high>
-      101 
-      </high>
+     <low>
+     50 
+     </low>
+     <high>
+     100 
+     </high>
    </interval>
 
   </intervals>

@@ -7,6 +7,10 @@ using namespace std;
 
 void FindPrimeNubrs::sieveEratosthenes(int *lowNumber, int *highNumber, vector<int> &tmpVector)
 {
+//    if (*lowNumber == *highNumber)
+//    {
+
+//    }
     vector<bool> prime(*highNumber + 1, true);
 
     prime[0] = prime[1] = false;
@@ -22,7 +26,7 @@ void FindPrimeNubrs::sieveEratosthenes(int *lowNumber, int *highNumber, vector<i
         }
     }
 
-    //mtx.lock();
+    mtx.lock();
 
     for (int i = *lowNumber; i <= *highNumber; ++i)
     {
@@ -32,10 +36,17 @@ void FindPrimeNubrs::sieveEratosthenes(int *lowNumber, int *highNumber, vector<i
         }
     }
 
-    sort(tmpVector.begin(), tmpVector.end());
-    tmpVector.erase(unique(tmpVector.begin(), tmpVector.end()), tmpVector.end());
+    if (tmpVector.size() != 1 || tmpVector.size() != 0)
+    {
+        sort(tmpVector.begin(), tmpVector.end());
+        tmpVector.erase(unique(tmpVector.begin(), tmpVector.end()), tmpVector.end());
+    }
+    else if (tmpVector.size() == 0)
+    {
+        exit(EXIT_FAILURE);
+    }
 
-    //mtx.unlock();
+    mtx.unlock();
 }
 
 vector<int> FindPrimeNubrs::getAllPrimeNubrs(vector<int> &myVector)
