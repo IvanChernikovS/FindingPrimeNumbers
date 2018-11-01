@@ -5,16 +5,16 @@
 
 using namespace std;
 
-ParseFile::ParseFile(string fromFileName)
+void negativeNumberParser(std::vector<int> &myVector);
+
+FileParser::FileParser(string fromFileName)
 {
     this -> fromFileName = fromFileName;
 }
 
-vector<int> ParseFile::findingIntervals (vector<int> &myVector)
+vector<int> FileParser::findingIntervals (vector<int> &myVector)
 {
     //Range range;
-//    vector<int> lowRange;
-//    vector<int> highRange;
 
     string line;
     bool begin_tag = false;
@@ -69,11 +69,39 @@ vector<int> ParseFile::findingIntervals (vector<int> &myVector)
     }
     xmlFile.close();
 
-    if(myVector.empty())
-    {
-        cout << "No range found!";
-        exit(EXIT_FAILURE);
-    }
+    negativeNumberParser(myVector);
+    zeroNumberParser(myVector);
 
     return myVector;
+}
+
+void FileParser::negativeNumberParser(vector<int> &myVector)
+{
+    for (int i = 0; i < myVector.size(); i++)
+    {
+        if (myVector[i] < 0)
+        {
+            myVector[i] = myVector[i]*(-1);
+        }
+        else if (myVector[i] == 0)
+        {
+
+        }
+    }
+}
+
+void FileParser::zeroNumberParser(vector<int> myVector)
+{
+    int i = 0;
+    while (i < myVector.size())
+    {
+        if (myVector[i] == 0)
+        {
+            myVector.erase(myVector.begin() + i);
+        }
+        else
+        {
+            ++i;
+        }
+    }
 }

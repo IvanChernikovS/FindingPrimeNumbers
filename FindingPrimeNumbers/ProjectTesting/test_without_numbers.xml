@@ -4,19 +4,19 @@
 
    <interval>
      <low>
-     10 
+      10
      </low>
      <high>
-     20 
+      30
      </high>
    </interval>
 
    <interval>
      <low>
-     30 
+      
      </low>
      <high>
-     40 
+      
      </high>
    </interval>
 

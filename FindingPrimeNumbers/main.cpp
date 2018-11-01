@@ -8,25 +8,34 @@ void printVector(std::vector<int> myVector);
 
 int main()
 {
-    //E:/study/FindingPrimeNumbers/origin_file.xml
+    //E:/study/FindingPrimeNumbers/original_file.xml
 
     std::vector<int> myVector;
 
-    //std::cout << "Enter file path to read:" << std::endl;
-    std::string fromFileName = "E:/study/FindingPrimeNumbers/original_file.xml";
-    //std::cin >> fromFileName;
+    std::cout << "Enter file path to read:" << std::endl;
+    std::string fromFileName;
+    std::cin >> fromFileName;
+
+    std::cout << "If negative numbers are in the file" << std::endl
+              << "They will be written modulo in vector." << std::endl;
 
     std::string toFileName = "E:/study/FindingPrimeNumbers/end_file.xml";
 
-    ParseFile parsefile(fromFileName);
+    FileParser parsefile(fromFileName);
     parsefile.findingIntervals(myVector);
+
+    if(myVector.empty())
+    {
+        std::cout << "No range found!";
+        exit(EXIT_FAILURE);
+    }
 
     //printVector(myVector);
 
     FindPrimeNubrs fprimeNum;
     fprimeNum.getAllPrimeNubrs(myVector);
 
-    printVector(myVector);
+    //printVector(myVector);
 
     WriteToFile wtfile(toFileName);
 

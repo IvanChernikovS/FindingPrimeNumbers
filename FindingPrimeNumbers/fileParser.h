@@ -11,11 +11,13 @@ struct Range
     int high;
 };
 
-class ParseFile
+class FileParser
 {
 public:
-    ParseFile(std::string fileName);
+    FileParser(std::string fileName);
     std::vector<int> findingIntervals(std::vector<int> &myVector);
+    void negativeNumberParser(std::vector<int> &myVector);
+    void zeroNumberParser(std::vector<int> myVector);
     std::string getFromFileName(){return this -> fromFileName;}
     void setFromFileName(std::string fromFileName){this -> fromFileName = fromFileName;}
 private:
