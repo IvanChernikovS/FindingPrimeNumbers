@@ -10,7 +10,7 @@ int main()
     std::string fromFileName;
     std::cin >> fromFileName;
 
-    std::cout << "\n" << "All zero intervals will be deleted." << std::endl;
+    std::cout << "\n" << "All zero intervals will be deleted." << "\n" << std::endl;
 
     std::string toFileName = "./end_file.xml";
 
@@ -37,5 +37,5 @@ int main()
         std::cout << "No prime numbers found!";
     }
 
-    std::cout << "\"End_file.xml\" file will be saved with the Makefile of project" << std::endl;
+    std::cout << "\"End_file.xml\" file will be saved with the Makefile of project." << std::endl;
 }
