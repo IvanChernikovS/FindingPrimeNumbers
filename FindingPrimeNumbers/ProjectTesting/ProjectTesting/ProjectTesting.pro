@@ -20,9 +20,9 @@ INCLUDEPATH += "../../"
 
 SOURCES += \
         main.cpp \
-    ../../writetofile.cpp \
-    ../../findprimenubrs.cpp \
-    ../../fileParser.cpp \
+    ../../writer_to_file.cpp \
+    ../../primer_finder.cpp \
+    ../../file_parser.cpp \
     gtest/src/gtest.cc \
     gtest/src/gtest-all.cc \
     gtest/src/gtest-death-test.cc \
@@ -38,6 +38,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    ../../writetofile.h \
-    ../../findprimenubrs.h \
-    ../../fileParser.h
+    ../../writer_to_file.h \
+    ../../primer_finder.h \
+    ../../file_parser.h

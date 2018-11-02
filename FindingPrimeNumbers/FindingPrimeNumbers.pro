@@ -15,10 +15,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    writetofile.cpp \
-    findprimenubrs.cpp \
-    fileParser.cpp \
-    main.cpp
+    main.cpp \
+    file_parser.cpp \
+    primer_finder.cpp \
+    writer_to_file.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -26,6 +26,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    writetofile.h \
-    findprimenubrs.h \
-    fileParser.h
+    file_parser.h \
+    primer_finder.h \
+    writer_to_file.h

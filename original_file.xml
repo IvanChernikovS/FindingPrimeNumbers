@@ -20,5 +20,14 @@
      </high>
    </interval>
 
+   <interval>
+     <low>
+      0
+     </low>
+     <high>
+      30
+     </high>
+   </interval>
+
   </intervals>
 </root>

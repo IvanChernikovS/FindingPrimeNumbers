@@ -1,58 +1,41 @@
 #include <iostream>
 #include <vector>
-#include "fileParser.h"
-#include "findprimenubrs.h"
-#include "writetofile.h"
-
-void printVector(std::vector<int> myVector);
+#include "file_parser.h"
+#include "primer_finder.h"
+#include "writer_to_file.h"
 
 int main()
 {
-    //E:/study/FindingPrimeNumbers/original_file.xml
-
-    std::vector<int> myVector;
-
     std::cout << "Enter file path to read:" << std::endl;
     std::string fromFileName;
     std::cin >> fromFileName;
 
-    std::cout << "If negative numbers are in the file" << std::endl
-              << "They will be written modulo in vector." << std::endl;
+    std::cout << "\n" << "All zero intervals will be deleted." << std::endl;
 
-    std::string toFileName = "E:/study/FindingPrimeNumbers/end_file.xml";
+    std::string toFileName = "./end_file.xml";
 
-    FileParser parsefile(fromFileName);
-    parsefile.findingIntervals(myVector);
+    FileParser fileParser(fromFileName);
+    std::vector<FileParser::Range> ranges =fileParser.getIntervals();
 
-    if(myVector.empty())
+    if(ranges.empty())
     {
         std::cout << "No range found!";
         exit(EXIT_FAILURE);
     }
 
-    //printVector(myVector);
+    PrimerFinder primeFinder;
+    std::vector<int> primeNumbers = primeFinder.getAllPrimeNumbers(ranges);
 
-    FindPrimeNubrs fprimeNum;
-    fprimeNum.getAllPrimeNubrs(myVector);
+    WriterToFile wtfile(toFileName);
 
-    //printVector(myVector);
-
-    WriteToFile wtfile(toFileName);
-
-    if (!myVector.empty())
+    if (!primeNumbers.empty())
     {
-        wtfile.writeToXmlFile(myVector);
+        wtfile.writeToXmlFile(primeNumbers);
     }
     else
     {
-        std::cout << "Vector is empty!";
+        std::cout << "No prime numbers found!";
     }
-}
 
-void printVector(std::vector<int> myVector)
-{
-    for (int i = 0; i < myVector.size(); i++)
-    {
-        std::cout << myVector[i]/*.low*/ << std::endl; //<< myVector[i].high << std::endl;
-    }
+    std::cout << "\"End_file.xml\" file will be saved with the Makefile of project" << std::endl;
 }

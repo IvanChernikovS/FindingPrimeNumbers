@@ -1,25 +1,31 @@
-#include "fileParser.h"
-#include "writetofile.h"
+#include "file_parser.h"
+#include "writer_to_file.h"
 #include <gtest/gtest.h>
 #include <iostream>
 #include <vector>
-#include "findprimenubrs.h"
+#include "primer_finder.h"
+
+//Four files for testing are stored in the project folder "ProjectTesting".
+//Compile the project and put these four files in the folder with "Makefile",
+//because the paths to them in the project are relative
+//or point for them the full path.
 
 using namespace std;
 
 bool compareVectors(vector<int> lhs, vector<int> rhs);
+bool compareVectorsofRanges(vector<FileParser::Range> lhs, vector<FileParser::Range> rhs);
 
 TEST ( Test_001, sieveEratosthenesTest )
 {
     //input
-    FindPrimeNubrs fTest;
+    PrimerFinder fTest;
     int low = 10;
     int high = 30;
     vector<int> myVector;
     vector<int> tmpVector = {11, 13, 17, 19, 23, 29};
 
     //Actual
-    fTest.sieveEratosthenes(&low, &high, myVector);
+    fTest.sieveEratosthenes(low, high, myVector);
     bool actual = compareVectors(myVector, tmpVector);
 
     //Expected
@@ -32,14 +38,14 @@ TEST ( Test_001, sieveEratosthenesTest )
 TEST ( Test_002, sieveEratosthenesTest )
 {
     //input
-    FindPrimeNubrs fTest;
+    PrimerFinder fTest;
     int low = 1;
     int high = 1;
     vector<int> myVector;
     vector<int> tmpVector = {1};
 
     //Actual
-    fTest.sieveEratosthenes(&low, &high, myVector);
+    fTest.sieveEratosthenes(low, high, myVector);
     bool actual = compareVectors(myVector, tmpVector);
 
     //Expected
@@ -52,14 +58,14 @@ TEST ( Test_002, sieveEratosthenesTest )
 TEST ( Test_003, sieveEratosthenesTest )
 {
     //input
-    FindPrimeNubrs fTest;
+    PrimerFinder fTest;
     int low = 0;
     int high = 0;
     vector<int> myVector;
     vector<int> tmpVector = {0};
 
     //Actual
-    fTest.sieveEratosthenes(&low, &high, myVector);
+    fTest.sieveEratosthenes(low, high, myVector);
     bool actual = compareVectors(myVector, tmpVector);
 
     //Expected
@@ -72,14 +78,14 @@ TEST ( Test_003, sieveEratosthenesTest )
 TEST ( Test_004, sieveEratosthenesTest )
 {
     //input
-    FindPrimeNubrs fTest;
+    PrimerFinder fTest;
     int low = 11;
     int high = 11;
     vector<int> myVector;
     vector<int> tmpVector = {11};
 
     //Actual
-    fTest.sieveEratosthenes(&low, &high, myVector);
+    fTest.sieveEratosthenes(low, high, myVector);
     bool actual = compareVectors(myVector, tmpVector);
 
     //Expected
@@ -92,14 +98,14 @@ TEST ( Test_004, sieveEratosthenesTest )
 TEST ( Test_005, sieveEratosthenesTest )
 {
     //input
-    FindPrimeNubrs fTest;
+    PrimerFinder fTest;
     int low = 10;
     int high = 10;
     vector<int> myVector;
     vector<int> tmpVector = {10};
 
     //Actual
-    fTest.sieveEratosthenes(&low, &high, myVector);
+    fTest.sieveEratosthenes(low, high, myVector);
     bool actual = compareVectors(myVector, tmpVector);
 
     //Expected
@@ -112,14 +118,14 @@ TEST ( Test_005, sieveEratosthenesTest )
 TEST ( Test_006, sieveEratosthenesTest )
 {
     //input
-    FindPrimeNubrs fTest;
+    PrimerFinder fTest;
     int low;
     int high;
     vector<int> myVector;
     vector<int> tmpVector;
 
     //Actual
-    fTest.sieveEratosthenes(&low, &high, myVector);
+    fTest.sieveEratosthenes(low, high, myVector);
     bool actual = compareVectors(myVector, tmpVector);
 
     //Expected
@@ -129,16 +135,15 @@ TEST ( Test_006, sieveEratosthenesTest )
     ASSERT_EQ (expected, actual);
 }
 
-TEST ( Test_007, findingIntervalsTest )
+TEST ( Test_007, getIntervalsTest )
 {
     //input
-    FileParser fparser("e:/study/FindingPrimeNumbers/FindingPrimeNumbers/ProjectTesting/test_original_file.xml");
-    vector<int> myVector;
-    vector<int> tmpVector = {10, 20, 50, 100};
+    FileParser fparser("./test_original_file.xml");
+    vector<FileParser::Range> ranges = fparser.getIntervals();
+    vector<FileParser::Range> tmpVector = {{10, 20}, {50, 100}};
 
     //Actual
-    fparser.findingIntervals(myVector);
-    bool actual = compareVectors(myVector, tmpVector);
+    bool actual = compareVectorsofRanges(ranges, tmpVector);
 
     //Expected
     bool expected = true;
@@ -147,16 +152,15 @@ TEST ( Test_007, findingIntervalsTest )
     ASSERT_EQ (expected, actual);
 }
 
-TEST ( Test_008, findingIntervalsTest )
+TEST ( Test_008, getIntervalsTest )
 {
     //input
-    FileParser fparser("e:/study/FindingPrimeNumbers/FindingPrimeNumbers/ProjectTesting/test_with_negative_numbers.xml");
-    vector<int> myVector;
-    vector<int> tmpVector = {10, 20, 30, 45};
+    FileParser fparser("./test_with_negative_numbers.xml");
+    vector<FileParser::Range> ranges = fparser.getIntervals();
+    vector<FileParser::Range> tmpVector = {{10, 20}, {30, 45}};
 
     //Actual
-    fparser.findingIntervals(myVector);
-    bool actual = compareVectors(myVector, tmpVector);
+    bool actual = compareVectorsofRanges(ranges, tmpVector);
 
     //Expected
     bool expected = true;
@@ -165,16 +169,32 @@ TEST ( Test_008, findingIntervalsTest )
     ASSERT_EQ (expected, actual);
 }
 
-TEST ( Test_009, findingIntervalsTest )
+TEST ( Test_009, getIntervalsTest )
 {
     //input
-    FileParser fparser("e:/study/FindingPrimeNumbers/FindingPrimeNumbers/ProjectTesting/test_without_numbers.xml");
-    vector<int> myVector;
-    vector<int> tmpVector = {10, 30};
+    FileParser fparser("./test_without_numbers.xml");
+    vector<FileParser::Range> ranges = fparser.getIntervals();
+    vector<FileParser::Range> tmpVector = {{10, 30}, {3, 40}};
 
     //Actual
-    fparser.findingIntervals(myVector);
-    bool actual = compareVectors(myVector, tmpVector);
+    bool actual = compareVectorsofRanges(ranges, tmpVector);
+
+    //Expected
+    bool expected = true;
+
+    //Check
+    ASSERT_EQ (expected, actual);
+}
+
+TEST ( Test_010, getIntervalsTest )
+{
+    //input
+    FileParser fparser("./test_without_intervals.xml");
+    vector<FileParser::Range> ranges = fparser.getIntervals();
+    vector<FileParser::Range> tmpVector;
+
+    //Actual
+    bool actual = compareVectorsofRanges(ranges, tmpVector);
 
     //Expected
     bool expected = false;
@@ -183,34 +203,16 @@ TEST ( Test_009, findingIntervalsTest )
     ASSERT_EQ (expected, actual);
 }
 
-TEST ( Test_010, findingIntervalsTest )
+TEST ( Test_011, getAllPrimeNumbersTest )
 {
     //input
-    FileParser fparser("e:/study/FindingPrimeNumbers/FindingPrimeNumbers/ProjectTesting/test_without_intervals.xml");
-    vector<int> myVector;
-    vector<int> tmpVector;
-
-    //Actual
-    fparser.findingIntervals(myVector);
-    bool actual = compareVectors(myVector, tmpVector);
-
-    //Expected
-    bool expected = false;
-
-    //Check
-    ASSERT_EQ (expected, actual);
-}
-
-TEST ( Test_011, getAllPrimeNubrsTest )
-{
-    //input
-    FindPrimeNubrs fTest;
-    vector<int> myVector = {10, 20, 30, 40};
+    PrimerFinder fTest;
+    const vector<FileParser::Range> ranges = {{10, 20}, {30, 40}};
     vector<int> tmpVector = {11, 13, 17, 19, 31 ,37};
+    vector<int> primeNum= fTest.getAllPrimeNumbers(ranges);
 
     //Actual
-    fTest.getAllPrimeNubrs(myVector);
-    bool actual = compareVectors(myVector, tmpVector);
+    bool actual = compareVectors(primeNum, tmpVector);
 
     //Expected
     bool expected = true;
@@ -219,16 +221,16 @@ TEST ( Test_011, getAllPrimeNubrsTest )
     ASSERT_EQ (expected, actual);
 }
 
-TEST ( Test_012, getAllPrimeNubrsTest )
+TEST ( Test_012, getAllPrimeNumbersTest )
 {
     //input
-    FindPrimeNubrs fTest;
-    vector<int> myVector = {10, 40, 20, 30};
+    PrimerFinder fTest;
+    const vector<FileParser::Range> ranges = {{10, 40}, {20, 30}};
     vector<int> tmpVector = {11, 13, 17, 19, 23, 29, 31 ,37};
+    vector<int> primeNum= fTest.getAllPrimeNumbers(ranges);
 
     //Actual
-    fTest.getAllPrimeNubrs(myVector);
-    bool actual = compareVectors(myVector, tmpVector);
+    bool actual = compareVectors(primeNum, tmpVector);
 
     //Expected
     bool expected = true;
@@ -237,17 +239,16 @@ TEST ( Test_012, getAllPrimeNubrsTest )
     ASSERT_EQ (expected, actual);
 }
 
-TEST ( Test_013, getAllPrimeNubrsTest )
+TEST ( Test_013, getAllPrimeNumbersTest )
 {
     //input
-    FindPrimeNubrs fTest;
-    vector<int> myVector = {10, 40, 20, 50};
+    PrimerFinder fTest;
+    const vector<FileParser::Range> ranges = {{10, 40}, {20, 50}};
     vector<int> tmpVector = {11, 13, 17, 19, 23, 29, 31 ,37, 41, 43, 47};
+    vector<int> primeNum= fTest.getAllPrimeNumbers(ranges);
 
     //Actual
-    fTest.getAllPrimeNubrs(myVector);
-    bool actual = compareVectors(myVector, tmpVector);
-
+    bool actual = compareVectors(primeNum, tmpVector);
 
     //Expected
     bool expected = true;
@@ -258,6 +259,7 @@ TEST ( Test_013, getAllPrimeNubrsTest )
 
 int main(int argc, char *argv[])
 {
+    cout << "";
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
@@ -274,4 +276,36 @@ bool compareVectors(vector<int> lhs, vector<int> rhs)
         std::sort(rhs.begin(), rhs.end());
         return (lhs == rhs);
     }
+}
+
+bool compareVectorsofRanges(vector<FileParser::Range> ranges, vector<FileParser::Range> tmpVector)
+{
+    bool actual;
+
+    if (ranges.size() != 0 && tmpVector.size() != 0)
+    {
+        if (ranges.size() == tmpVector.size())
+        {
+            for (size_t i = 0; i < ranges.size(); i++)
+            {
+                if (ranges.at(i).begin == tmpVector.at(i).begin)
+                {
+                    actual = true;
+                }
+                else if (ranges.at(i).end == tmpVector.at(i).end)
+                {
+                    actual = true;
+                }
+                else
+                {
+                    actual = false;
+                }
+            }
+        }
+        else
+        {
+            actual = false;
+        }
+    }
+    return actual;
 }

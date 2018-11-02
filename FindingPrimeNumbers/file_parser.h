@@ -1,27 +1,27 @@
-#ifndef FILEPARSER_H
-#define FILEPARSER_H
+#ifndef FILE_PARSER_H
+#define FILE_PARSER_H
 
 #include <string>
 #include <vector>
 #include <iostream>
 
-struct Range
-{
-    int low;
-    int high;
-};
-
 class FileParser
 {
 public:
+    struct Range
+    {
+        int begin;
+        int end;
+    };
+public:
     FileParser(std::string fileName);
-    std::vector<int> findingIntervals(std::vector<int> &myVector);
-    void negativeNumberParser(std::vector<int> &myVector);
-    void zeroNumberParser(std::vector<int> myVector);
+    std::vector<Range> getIntervals();
+    void negativeNumberParser(std::vector<Range>& ranges);
+    void zeroNumberParser(std::vector<Range>& ranges);
     std::string getFromFileName(){return this -> fromFileName;}
     void setFromFileName(std::string fromFileName){this -> fromFileName = fromFileName;}
 private:
     std::string fromFileName;
 };
 
-#endif // FILEPARSER_H
+#endif // FILE_PARSER_H
