@@ -2,6 +2,7 @@
 #include <iostream>
 #include <thread>
 #include <algorithm>
+#include <math.h>
 
 using namespace std;
 
