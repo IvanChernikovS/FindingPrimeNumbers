@@ -10,8 +10,10 @@ class WriterToFile
 public:
     WriterToFile(std::string fileName);
     void writeToXmlFile(std::vector<int>& myVector);
+
     std::string getWriteFileName(){return this -> toFileName;}
     void setWriteFileName(std::string toFileName){this -> toFileName = toFileName;}
+
 private:
     std::string toFileName;
 };

@@ -6,7 +6,7 @@
 
 int main()
 {
-    std::cout << "Enter file path to read:" << std::endl;
+    std::cout << "Enter file path to read:" << std::endl; //E:/study/FindingPrimeNumbers/original_file.xml
     std::string fromFileName;
     std::cin >> fromFileName;
 
@@ -15,7 +15,7 @@ int main()
     std::string toFileName = "./end_file.xml";
 
     FileParser fileParser(fromFileName);
-    std::vector<FileParser::Range> ranges =fileParser.getIntervals();
+    std::vector<FileParser::Range> ranges = fileParser.getIntervals();
 
     if(ranges.empty())
     {
@@ -34,7 +34,7 @@ int main()
     }
     else
     {
-        std::cout << "No prime numbers found!";
+        std::cout << "No prime numbers found!" << std::endl;
     }
 
     std::cout << "\"End_file.xml\" file will be saved with the Makefile of project." << std::endl;

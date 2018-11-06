@@ -20,7 +20,12 @@ vector<int> PrimerFinder::getAllPrimeNumbers(const vector<FileParser::Range>& ra
             int begin = std::min(ranges.at(i).begin, ranges.at(i).end);
             int end = std::max(ranges.at(i).begin, ranges.at(i).end);
             th[i] = thread([&](){sieveEratosthenes(begin, end, primeNumbers);});
+            //this_thread::sleep_for(chrono::milliseconds(100));
+            //th[i].join();
+        }
 
+        for (size_t i = 0; i < ranges.size(); ++i)
+        {
             th[i].join();
         }
 
@@ -29,6 +34,10 @@ vector<int> PrimerFinder::getAllPrimeNumbers(const vector<FileParser::Range>& ra
 
 void PrimerFinder::sieveEratosthenes(int lowNumber, int highNumber, vector<int>& tmpVector)
 {
+    //this_thread::sleep_for(chrono::milliseconds(1000));
+    cout << this_thread::get_id() << endl;
+
+
     if (lowNumber == highNumber)
     {
         if (!isPrimeNumber(lowNumber))

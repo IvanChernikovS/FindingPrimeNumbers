@@ -13,9 +13,12 @@ class PrimerFinder
 public:
     explicit PrimerFinder(){}
     std::vector<int> getAllPrimeNumbers(const std::vector<FileParser::Range>& ranges);
+
+    std::mutex mtx;
+
+private:
     void sieveEratosthenes(int lowNumber, int highNumber, std::vector<int>& tmpVector);
     bool isPrimeNumber(int num);
-    std::mutex mtx;
 };
 
 #endif // PRIMER_FINDER_H

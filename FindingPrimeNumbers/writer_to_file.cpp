@@ -22,6 +22,7 @@ void WriterToFile::writeToXmlFile (vector<int>& primeNumbers)
         {
             xmlFileName << "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                         << "\n" << "<root>" << "\n    " << "<primes> ";
+
             for (size_t i = 0; i < primeNumbers.size(); i++)
             {
                 xmlFileName << primeNumbers[i] << " ";

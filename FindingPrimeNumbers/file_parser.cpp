@@ -70,7 +70,7 @@ vector<FileParser::Range> FileParser::getIntervals()
     }
     else
     {
-        cout << "original_file wasn`t open";
+        cout << "\"original_file.xml\" wasn`t open" << endl;
     }
     xmlFile.close();
 

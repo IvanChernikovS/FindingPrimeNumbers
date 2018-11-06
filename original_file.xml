@@ -4,10 +4,10 @@
 
    <interval>
      <low>
-     10 
+     20 
      </low>
      <high>
-     20 
+     10 
      </high>
    </interval>
 
@@ -22,12 +22,22 @@
 
    <interval>
      <low>
-      0
+     0 
      </low>
      <high>
-      30
+     10 
      </high>
    </interval>
+
+   <interval>
+     <low>
+     100 
+     </low>
+     <high>
+     40 
+     </high>
+   </interval>
+
 
   </intervals>
 </root>
