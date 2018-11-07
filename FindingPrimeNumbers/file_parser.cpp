@@ -5,12 +5,12 @@
 
 using namespace std;
 
-FileParser::FileParser(string fromFileName)
+FileParser::FileParser (string fromFileName)
 {
     this -> fromFileName = fromFileName;
 }
 
-vector<FileParser::Range> FileParser::getIntervals()
+vector<FileParser::Range> FileParser::getIntervals ()
 {
     vector<FileParser::Range> ranges;
 
@@ -27,7 +27,7 @@ vector<FileParser::Range> FileParser::getIntervals()
         {
             string tmp;
 
-            for (int i = 0; i < line.length(); i++)
+            for (int i = 0; i < line.length(); ++i)
             {
 
                 if (line[i] == ' ' && tmp.size() == 0)
@@ -80,7 +80,7 @@ vector<FileParser::Range> FileParser::getIntervals()
     return ranges;
 }
 
-void FileParser::negativeNumberParser(vector<Range>& ranges)
+void FileParser::negativeNumberParser (vector<Range>& ranges)
 {
     for (auto& range: ranges)
     {
@@ -95,9 +95,9 @@ void FileParser::negativeNumberParser(vector<Range>& ranges)
     }
 }
 
-void FileParser::zeroNumberParser(vector<Range>& ranges)
+void FileParser::zeroNumberParser (vector<Range>& ranges)
 {
-    int i = 0;
+    size_t i = 0;
     while (i < ranges.size())
     {
         if (ranges.at(i).begin == 0 && ranges.at(i).end == 0)
@@ -106,7 +106,7 @@ void FileParser::zeroNumberParser(vector<Range>& ranges)
         }
         else if (ranges.at(i).begin == 0 && ranges.at(i).end != 0)
         {
-            ranges.at(i).begin = ranges.at(i).begin + 3;
+            ranges.at(i).begin = ranges.at(i).begin + 2;
         }
         else
         {

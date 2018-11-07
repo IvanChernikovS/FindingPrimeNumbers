@@ -4,7 +4,7 @@
 
 using namespace std;
 
-WriterToFile::WriterToFile(string toFileName)
+WriterToFile::WriterToFile (string toFileName)
 {
     this -> toFileName = toFileName;
 }

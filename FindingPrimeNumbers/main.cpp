@@ -7,8 +7,8 @@
 int main()
 {
     std::cout << "Enter file path to read:" << std::endl; //E:/study/FindingPrimeNumbers/original_file.xml
-    std::string fromFileName;
-    std::cin >> fromFileName;
+    std::string fromFileName = "E:/study/FindingPrimeNumbers/original_file.xml";
+    //std::cin >> fromFileName;
 
     std::cout << "\n" << "All zero intervals will be deleted." << "\n" << std::endl;
 

@@ -6,7 +6,7 @@
 
 using namespace std;
 
-vector<int> PrimerFinder::getAllPrimeNumbers(const vector<FileParser::Range>& ranges)
+vector<int> PrimerFinder::getAllPrimeNumbers (const vector<FileParser::Range>& ranges)
 {
         vector<int> primeNumbers;
         primeNumbers.reserve(ESTIMATED_MAX_NUM_OF_ITEMS);
@@ -19,25 +19,32 @@ vector<int> PrimerFinder::getAllPrimeNumbers(const vector<FileParser::Range>& ra
         {
             int begin = std::min(ranges.at(i).begin, ranges.at(i).end);
             int end = std::max(ranges.at(i).begin, ranges.at(i).end);
-            th[i] = thread([&](){sieveEratosthenes(begin, end, primeNumbers);});
-            //this_thread::sleep_for(chrono::milliseconds(100));
-            //th[i].join();
+
+            th[i] = thread(&PrimerFinder::sieveEratosthenes, this, begin, end, ref(primeNumbers));
         }
 
         for (size_t i = 0; i < ranges.size(); ++i)
         {
-            th[i].join();
+            if (th[i].joinable())
+            {
+                th[i].join();
+            }
+        }
+
+        if (primeNumbers.size() != 1 || primeNumbers.size() != 0)
+        {
+            primeNumbers = vectorCheck(primeNumbers);
+        }
+        else if (primeNumbers.size() == 0)
+        {
+            exit(EXIT_FAILURE);
         }
 
     return primeNumbers;
 }
 
-void PrimerFinder::sieveEratosthenes(int lowNumber, int highNumber, vector<int>& tmpVector)
+void PrimerFinder::sieveEratosthenes (int lowNumber, int highNumber, vector<int>& tmpVector)
 {
-    //this_thread::sleep_for(chrono::milliseconds(1000));
-    cout << this_thread::get_id() << endl;
-
-
     if (lowNumber == highNumber)
     {
         if (!isPrimeNumber(lowNumber))
@@ -66,31 +73,21 @@ void PrimerFinder::sieveEratosthenes(int lowNumber, int highNumber, vector<int>&
             }
         }
 
-        mtx.lock();
-
         for (int i = lowNumber; i <= highNumber; ++i)
         {
             if (prime[i])
             {
+                mtx.lock();
+
                 tmpVector.push_back(i);
+
+                mtx.unlock();
             }
         }
-
-        if (tmpVector.size() != 1 || tmpVector.size() != 0)
-        {
-            sort(tmpVector.begin(), tmpVector.end());
-            tmpVector.erase(unique(tmpVector.begin(), tmpVector.end()), tmpVector.end());
-        }
-        else if (tmpVector.size() == 0)
-        {
-            exit(EXIT_FAILURE);
-        }
-
-        mtx.unlock();
     }
 }
 
-bool PrimerFinder::isPrimeNumber(int num)
+bool PrimerFinder::isPrimeNumber (int num)
 {
     if (num == 1 || num == 0)
     {
@@ -107,4 +104,12 @@ bool PrimerFinder::isPrimeNumber(int num)
         }
         return false;
     }
+}
+
+vector<int> PrimerFinder::vectorCheck (vector<int> tmpVector)
+{
+        sort(tmpVector.begin(), tmpVector.end());
+        tmpVector.erase(unique(tmpVector.begin(), tmpVector.end()), tmpVector.end());
+
+    return tmpVector;
 }

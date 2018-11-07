@@ -15,15 +15,15 @@ public:
     };
 
 public:
-    FileParser(std::string fileName);
-    std::vector<Range> getIntervals();
+    FileParser (std::string fileName);
+    std::vector<Range> getIntervals ();
 
-    std::string getFromFileName(){return this -> fromFileName;}
-    void setFromFileName(std::string fromFileName){this -> fromFileName = fromFileName;}
+    std::string getFromFileName (){return this -> fromFileName;}
+    void setFromFileName (std::string fromFileName){this -> fromFileName = fromFileName;}
 
 private:
-    void negativeNumberParser(std::vector<Range>& ranges);
-    void zeroNumberParser(std::vector<Range>& ranges);
+    void negativeNumberParser (std::vector<Range>& ranges);
+    void zeroNumberParser (std::vector<Range>& ranges);
 
     std::string fromFileName;
 };
