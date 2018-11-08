@@ -16,9 +16,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    file_parser.cpp \
-    primer_finder.cpp \
-    writer_to_file.cpp
+    UniquePrimeNumbersCollection.cpp \
+    PrimerFinder.cpp \
+    FileParser.cpp \
+    WriterToFile.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -26,6 +27,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    file_parser.h \
-    primer_finder.h \
-    writer_to_file.h
+    UniquePrimeNumbersCollection.h \
+    PrimerFinder.h \
+    FileParser.h \
+    WriterToFile.h

@@ -1,17 +1,18 @@
-#include "writer_to_file.h"
+#include "WriterToFile.h"
 #include <fstream>
 #include <iostream>
 
 using namespace std;
 
-WriterToFile::WriterToFile (string toFileName)
+WriterToFile::WriterToFile(string toFileName)
 {
     this -> toFileName = toFileName;
 }
 
-void WriterToFile::writeToXmlFile (vector<int>& primeNumbers)
+void WriterToFile::writeToXmlFile(UniquePrimeNumbersCollection& primeNum)
 {
     ofstream xmlFileName;
+    vector<int> primeNumbers = primeNum.getPrimeNumbers();
 
     if(!primeNumbers.empty())
     {

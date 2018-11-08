@@ -1,16 +1,16 @@
-#include "file_parser.h"
+#include "FileParser.h"
 #include <fstream>
 #include <stdlib.h>
 #include <iostream>
 
 using namespace std;
 
-FileParser::FileParser (string fromFileName)
+FileParser::FileParser(string fromFileName)
 {
     this -> fromFileName = fromFileName;
 }
 
-vector<FileParser::Range> FileParser::getIntervals ()
+vector<FileParser::Range> FileParser::getIntervals()
 {
     vector<FileParser::Range> ranges;
 
@@ -80,7 +80,7 @@ vector<FileParser::Range> FileParser::getIntervals ()
     return ranges;
 }
 
-void FileParser::negativeNumberParser (vector<Range>& ranges)
+void FileParser::negativeNumberParser(vector<Range>& ranges)
 {
     for (auto& range: ranges)
     {
@@ -95,7 +95,7 @@ void FileParser::negativeNumberParser (vector<Range>& ranges)
     }
 }
 
-void FileParser::zeroNumberParser (vector<Range>& ranges)
+void FileParser::zeroNumberParser(vector<Range>& ranges)
 {
     size_t i = 0;
     while (i < ranges.size())

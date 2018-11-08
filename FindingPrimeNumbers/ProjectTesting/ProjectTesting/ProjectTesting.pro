@@ -20,9 +20,9 @@ INCLUDEPATH += "../../"
 
 SOURCES += \
         main.cpp \
-    ../../writer_to_file.cpp \
-    ../../primer_finder.cpp \
-    ../../file_parser.cpp \
+    ../../WriterToFile.cpp \
+    ../../PrimerFinder.cpp \
+    ../../FileParser.cpp \
     gtest/src/gtest.cc \
     gtest/src/gtest-all.cc \
     gtest/src/gtest-death-test.cc \
@@ -30,7 +30,8 @@ SOURCES += \
     gtest/src/gtest-port.cc \
     gtest/src/gtest-printers.cc \
     gtest/src/gtest-test-part.cc \
-    gtest/src/gtest-typed-test.cc
+    gtest/src/gtest-typed-test.cc \
+    ../../UniquePrimeNumbersCollection.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -38,6 +39,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    ../../writer_to_file.h \
-    ../../primer_finder.h \
-    ../../file_parser.h
+    ../../WriterToFile.h \
+    ../../PrimerFinder.h \
+    ../../FileParser.h \
+    ../../UniquePrimeNumbersCollection.h

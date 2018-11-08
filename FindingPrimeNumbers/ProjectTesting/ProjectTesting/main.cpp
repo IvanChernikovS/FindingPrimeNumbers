@@ -1,6 +1,7 @@
-#include "file_parser.h"
-#include "writer_to_file.h"
-#include "primer_finder.h"
+#include "FileParser.h"
+#include "WriterToFile.h"
+#include "PrimerFinder.h"
+#include "UniquePrimeNumbersCollection.h"
 #include <gtest/gtest.h>
 #include <iostream>
 #include <vector>
@@ -86,10 +87,12 @@ TEST ( Test_004, getIntervalsTest )
 TEST ( Test_005, getAllPrimeNumbersTest )
 {
     //input
-    PrimerFinder fTest;
-    const vector<FileParser::Range> ranges = {{10, 20}, {30, 40}, {50, 55}};
+    PrimerFinder prFinder;
+    UniquePrimeNumbersCollection primeNumbers;
+    vector<FileParser::Range> ranges = {{10, 20}, {30, 40}, {50, 55}};
     vector<int> tmpVector = {11, 13, 17, 19, 31 ,37, 53};
-    vector<int> primeNum = fTest.getAllPrimeNumbers(ranges);
+    prFinder.getAllPrimeNumbers(ranges, primeNumbers);
+    vector<int> primeNum = primeNumbers.getPrimeNumbers();
 
     //Actual
     bool actual = compareVectors(primeNum, tmpVector);
@@ -104,10 +107,12 @@ TEST ( Test_005, getAllPrimeNumbersTest )
 TEST ( Test_006, getAllPrimeNumbersTest )
 {
     //input
-    PrimerFinder fTest;
-    const vector<FileParser::Range> ranges = {{20, 10}, {40, 30}, {60, 50}};
+    PrimerFinder prFinder;
+    UniquePrimeNumbersCollection primeNumbers;
+    vector<FileParser::Range> ranges = {{20, 10}, {40, 30}, {60, 50}};
     vector<int> tmpVector = {11, 13, 17, 19, 31 ,37, 53, 59};
-    vector<int> primeNum = fTest.getAllPrimeNumbers(ranges);
+    prFinder.getAllPrimeNumbers(ranges, primeNumbers);
+    vector<int> primeNum = primeNumbers.getPrimeNumbers();
 
     //Actual
     bool actual = compareVectors(primeNum, tmpVector);
@@ -122,10 +127,12 @@ TEST ( Test_006, getAllPrimeNumbersTest )
 TEST ( Test_007, getAllPrimeNumbersTest )
 {
     //input
-    PrimerFinder fTest;
-    const vector<FileParser::Range> ranges = {{10, 10}, {31, 31}, {100, 101}};
+    PrimerFinder prFinder;
+    UniquePrimeNumbersCollection primeNumbers;
+    vector<FileParser::Range> ranges = {{10, 10}, {31, 31}, {100, 101}};
     vector<int> tmpVector = {31, 101};
-    vector<int> primeNum = fTest.getAllPrimeNumbers(ranges);
+    prFinder.getAllPrimeNumbers(ranges, primeNumbers);
+    vector<int> primeNum = primeNumbers.getPrimeNumbers();
 
     //Actual
     bool actual = compareVectors(primeNum, tmpVector);
@@ -140,10 +147,12 @@ TEST ( Test_007, getAllPrimeNumbersTest )
 TEST ( Test_008, getAllPrimeNumbersTest )
 {
     //input
-    PrimerFinder fTest;
-    const vector<FileParser::Range> ranges = {{10, 20}, {30, 40}, {0, 3}};
+    PrimerFinder prFinder;
+    UniquePrimeNumbersCollection primeNumbers;
+    vector<FileParser::Range> ranges = {{10, 20}, {30, 40}, {0, 3}};
     vector<int> tmpVector = {2, 3, 11, 13, 17, 19, 31 ,37};
-    vector<int> primeNum = fTest.getAllPrimeNumbers(ranges);
+    prFinder.getAllPrimeNumbers(ranges, primeNumbers);
+    vector<int> primeNum = primeNumbers.getPrimeNumbers();
 
     //Actual
     bool actual = compareVectors(primeNum, tmpVector);
@@ -158,10 +167,12 @@ TEST ( Test_008, getAllPrimeNumbersTest )
 TEST ( Test_009, getAllPrimeNumbersTest )
 {
     //input
-    PrimerFinder fTest;
-    const vector<FileParser::Range> ranges;
+    PrimerFinder prFinder;
+    UniquePrimeNumbersCollection primeNumbers;
+    vector<FileParser::Range> ranges;
     vector<int> tmpVector;
-    vector<int> primeNum = fTest.getAllPrimeNumbers(ranges);
+    prFinder.getAllPrimeNumbers(ranges, primeNumbers);
+    vector<int> primeNum = primeNumbers.getPrimeNumbers();
 
     //Actual
     bool actual = compareVectors(primeNum, tmpVector);
@@ -176,10 +187,12 @@ TEST ( Test_009, getAllPrimeNumbersTest )
 TEST ( Test_010, getAllPrimeNumbersTest )
 {
     //input
-    PrimerFinder fTest;
-    const vector<FileParser::Range> ranges = {{0, 0}, {1, 1}, {2, 2}, {3, 3}};
+    PrimerFinder prFinder;
+    UniquePrimeNumbersCollection primeNumbers;
+    vector<FileParser::Range> ranges = {{0, 0}, {1, 1}, {2, 2}, {3, 3}};
     vector<int> tmpVector = {3};
-    vector<int> primeNum = fTest.getAllPrimeNumbers(ranges);
+    prFinder.getAllPrimeNumbers(ranges, primeNumbers);
+    vector<int> primeNum = primeNumbers.getPrimeNumbers();
 
     //Actual
     bool actual = compareVectors(primeNum, tmpVector);
@@ -194,10 +207,12 @@ TEST ( Test_010, getAllPrimeNumbersTest )
 TEST ( Test_011, getAllPrimeNumbersTest )
 {
     //input
-    PrimerFinder fTest;
-    const vector<FileParser::Range> ranges = {{0, 0}, {30, 20}, {0, 10}, {11, 11}};
+    PrimerFinder prFinder;
+    UniquePrimeNumbersCollection primeNumbers;
+    vector<FileParser::Range> ranges = {{0, 0}, {30, 20}, {0, 10}, {11, 11}};
     vector<int> tmpVector = {2, 3, 5, 7, 11, 23, 29};
-    vector<int> primeNum = fTest.getAllPrimeNumbers(ranges);
+    prFinder.getAllPrimeNumbers(ranges, primeNumbers);
+    vector<int> primeNum = primeNumbers.getPrimeNumbers();
 
     //Actual
     bool actual = compareVectors(primeNum, tmpVector);
